@@ -14,7 +14,6 @@ num_nodes= 6;
 function calculate_distances(T) {
     d = [];
     for (const node in T){
-       // console.log(T[node][0]);
         S = 0;
         N = 0;
         obj = T[node][0];
@@ -32,8 +31,6 @@ function calculate_distances(T) {
      //sorting object
      SortedT = Object.keys(T).sort(function(a,b){return T[a][1]-T[b][1]});
      SortedV = Object.keys(T).sort(function(a,b){return T[a][1]-T[b][1]}).map(key=>T[key]);
-     //console.log(SortedT);
-     //console.log(SortedV);
      var result = {};
      SortedT.forEach((key, i) => result[key] = SortedV[i]);
      console.log(result);
@@ -62,23 +59,17 @@ function draw(T){
     position = 100;
     d = 100;
     keys.forEach(item =>{
-      // console.log(item);
       poses[item] = position;
       position+=d ;});
     keys.forEach(node =>{
-      // console.log(item);
       write_name(node, poses[node]); 
       write_distance(T[node][1], poses[node]); 
       neighbors = T[node][0];
-      //console.log(node);
-      //console.log("NEIGHBORS");
-      //console.log(neighbors);
       neighbors.forEach((neighbor,index) => {
         //getting neighbors 
         if(neighbor !=0){
         node1_pose = poses[node];
         node2_pose = poses["v"+index];
-       // console.log("node "+node, node1_pose,"v"+index, node2_pose);
         center = (node1_pose+node2_pose)/2;
         distance = Math.abs(node1_pose-node2_pose)/2;
         ctx.beginPath();
