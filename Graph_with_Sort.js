@@ -9,7 +9,7 @@ T0 = {
 };
 
 num_nodes= 6;
-console.log(T0);
+// console.log(T0);
 
 function calculate_distances(T) {
     d = [];
@@ -29,10 +29,6 @@ function calculate_distances(T) {
         S/=parseFloat(N);
         T[node][1] = S;        
     }
-   return T;
-}
-
-function sort(T){
      //sorting object
      SortedT = Object.keys(T).sort(function(a,b){return T[a][1]-T[b][1]});
      SortedV = Object.keys(T).sort(function(a,b){return T[a][1]-T[b][1]}).map(key=>T[key]);
@@ -43,6 +39,18 @@ function sort(T){
      console.log(result);
      return result;
 }
+
+// function sort(T){
+//      //sorting object
+//      SortedT = Object.keys(T).sort(function(a,b){return T[a][1]-T[b][1]});
+//      SortedV = Object.keys(T).sort(function(a,b){return T[a][1]-T[b][1]}).map(key=>T[key]);
+//      //console.log(SortedT);
+//      //console.log(SortedV);
+//      var result = {};
+//      SortedT.forEach((key, i) => result[key] = SortedV[i]);
+//      console.log(result);
+//      return result;
+// }
 
 function draw(T){
     //draw 
@@ -61,15 +69,15 @@ function draw(T){
       // console.log(item);
       write_name(node, poses[node]); 
       neighbors = T[node][0];
-      console.log(node);
-      console.log("NEIGHBORS");
-      console.log(neighbors);
+      //console.log(node);
+      //console.log("NEIGHBORS");
+      //console.log(neighbors);
       neighbors.forEach((neighbor,index) => {
         //getting neighbors 
         if(neighbor !=0){
         node1_pose = poses[node];
         node2_pose = poses["v"+index];
-        console.log("node "+node, node1_pose,"v"+index, node2_pose);
+       // console.log("node "+node, node1_pose,"v"+index, node2_pose);
         center = (node1_pose+node2_pose)/2;
         distance = Math.abs(node1_pose-node2_pose)/2;
         ctx.beginPath();
@@ -91,22 +99,27 @@ function write_distance(txt,pos){
     ctx.fillText(txt, pos, 170);
     
 }
+function sleep(milliseconds) {
+  const date = Date.now();
+  let currentDate = null;
+  do {
+    currentDate = Date.now();
+  } while (currentDate - date < milliseconds);
+}
 
 //algorithme 
 var c = document.getElementById("myCanvas");
 var ctx = c.getContext("2d");
 
 
-// dessiner T0
-T0 = calculate_distances(T0);
-draw(T0);
-
-
-
-T1 = sort(T0);
-T1 = calculate_distances(T1);
-T2 = sort(T1);
-T2= calculate_distances(T2);
-T3 = sort(T2);
-
+T1 = calculate_distances(T0);
+i = 1 ; 
+while(true){
+  T2 = calculate_distances(T1);
+  draw(T2); 
+  if (JSON.stringify(T2) === JSON.stringify(T1) )
+    break;
+  T1 = T2; 
+  console.log("iteration " + i++);
+}
 
