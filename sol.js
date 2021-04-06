@@ -36,19 +36,6 @@ function calculate_distances(T) {
      console.log(result);
      return result;
 }
-
-// function sort(T){
-//      //sorting object
-//      SortedT = Object.keys(T).sort(function(a,b){return T[a][1]-T[b][1]});
-//      SortedV = Object.keys(T).sort(function(a,b){return T[a][1]-T[b][1]}).map(key=>T[key]);
-//      //console.log(SortedT);
-//      //console.log(SortedV);
-//      var result = {};
-//      SortedT.forEach((key, i) => result[key] = SortedV[i]);
-//      console.log(result);
-//      return result;
-// }
-
 function draw(T){
     //draw 
     ctx.clearRect(0, 0, c.width, c.height);
